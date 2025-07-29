@@ -1,5 +1,20 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+mod crypto;
+mod db;
+mod user;
+
+use user::person::Person;
+
+use crate::crypto::rsa::RSA;
+
 fn main() {
     app_lib::run();
+    let mut person1 = Person::new(String::from("person1"));
+    let person2 = Person::new(String::from("person2 "));
+
+    RSA::encrypt(&mut person1, "nanimo".to_string(), &person2);
+    println!("{:?}", RSA::decrypt(&person2));
+    RSA::encrypt(&mut person1, "is the".to_string(), &person2);
+    println!("{:?}", RSA::decrypt(&person2));
+    RSA::encrypt(&mut person1, "goat".to_string(), &person2);
+    println!("{:?}", RSA::decrypt(&person2));
 }

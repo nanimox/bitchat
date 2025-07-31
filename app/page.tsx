@@ -7,7 +7,7 @@ export default function Home() {
   const [data, setData] = useState("");
 
   function handleBtn() {
-    invoke<string>("app", { data: input })
+    invoke<string>("cycle", { msg: input })
       .then((res) => setData(res))
       .catch(console.error);
   }
